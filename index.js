@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 let items = [];
-let id = 0;
+let id = 1;
 
 app.get("/", async (req, res) => {
   try{
