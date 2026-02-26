@@ -19,6 +19,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 let items = [];
+let id = 0;
 
 app.get("/", async (req, res) => {
   try{
@@ -36,8 +37,9 @@ app.get("/", async (req, res) => {
 
 app.post("/add",async (req, res) => {
   const item = req.body.newItem;
+  const newId = id++
   try{
-    await db.query("INSERT INTO items(title) VALUES ($1)", [item]);
+    await db.query("INSERT INTO items(id, title) VALUES ($1, $2)", [newId, item]);
     res.redirect("/");
   }catch(err){
     console.log(err);
